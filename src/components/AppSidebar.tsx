@@ -6,6 +6,7 @@ import {
   ClipboardList,
   GraduationCap,
   Calendar,
+  Video,
   Settings,
 } from "lucide-react";
 
@@ -28,6 +29,7 @@ const menuItems = [
   { title: "Assignments", url: "/assignments", icon: ClipboardList },
   { title: "Grades", url: "/grades", icon: GraduationCap },
   { title: "Schedule", url: "/schedule", icon: Calendar },
+  { title: "Live Class", url: "/live-class", icon: Video },
 ];
 
 export function AppSidebar() {

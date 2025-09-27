@@ -11,6 +11,7 @@ import Courses from "./pages/Courses";
 import Assignments from "./pages/Assignments";
 import Grades from "./pages/Grades";
 import Schedule from "./pages/Schedule";
+import LiveClass from "./pages/LiveClass";
 import NotFound from "./pages/NotFound";
 
 const queryClient = new QueryClient();
@@ -30,6 +31,7 @@ const App = () => (
               <Route path="assignments" element={<Assignments />} />
               <Route path="grades" element={<Grades />} />
               <Route path="schedule" element={<Schedule />} />
+              <Route path="live-class" element={<LiveClass />} />
             </Route>
             <Route path="*" element={<NotFound />} />
           </Routes>

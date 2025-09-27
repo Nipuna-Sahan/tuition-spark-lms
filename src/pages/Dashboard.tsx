@@ -92,17 +92,23 @@ const Dashboard = () => {
   ];
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 animate-fade-in">
       {/* Header */}
-      <div>
-        <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
-        <p className="text-muted-foreground">Welcome back! Here's an overview of your tuition class.</p>
+      <div className="flex items-center justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-foreground">Dashboard</h1>
+          <p className="text-muted-foreground">Welcome back! Here's an overview of your tuition class.</p>
+        </div>
+        <Button className="hover-scale">
+          <Bell className="h-4 w-4 mr-2" />
+          View All Notifications
+        </Button>
       </div>
 
       {/* Stats Cards */}
       <div className="grid gap-4 md:grid-cols-2 lg:grid-cols-4">
         {stats.map((stat, index) => (
-          <Card key={index} className="shadow-card">
+          <Card key={index} className="shadow-card hover-scale animate-scale-in" style={{ animationDelay: `${index * 0.1}s` }}>
             <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
               <CardTitle className="text-sm font-medium">{stat.title}</CardTitle>
               <stat.icon className={`h-4 w-4 ${stat.color}`} />
@@ -123,7 +129,7 @@ const Dashboard = () => {
 
       <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {/* Recent Activity */}
-        <Card className="col-span-2 shadow-card">
+        <Card className="col-span-2 shadow-card animate-slide-in-right">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Bell className="h-5 w-5" />
@@ -134,7 +140,7 @@ const Dashboard = () => {
           <CardContent>
             <div className="space-y-4">
               {recentActivity.map((activity, index) => (
-                <div key={index} className="flex items-center justify-between p-3 bg-muted rounded-lg">
+                <div key={index} className="flex items-center justify-between p-3 bg-muted rounded-lg hover-scale animate-fade-in" style={{ animationDelay: `${index * 0.1}s` }}>
                   <div>
                     <p className="font-medium">{activity.action}</p>
                     <p className="text-sm text-muted-foreground">
@@ -145,14 +151,14 @@ const Dashboard = () => {
                 </div>
               ))}
             </div>
-            <Button variant="outline" className="w-full mt-4">
+            <Button variant="outline" className="w-full mt-4 hover-scale">
               View All Activity
             </Button>
           </CardContent>
         </Card>
 
         {/* Today's Schedule */}
-        <Card className="shadow-card">
+        <Card className="shadow-card animate-slide-in-right" style={{ animationDelay: '0.2s' }}>
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Calendar className="h-5 w-5" />
@@ -163,7 +169,7 @@ const Dashboard = () => {
           <CardContent>
             <div className="space-y-3">
               {upcomingClasses.map((class_, index) => (
-                <div key={index} className="p-3 border rounded-lg">
+                <div key={index} className="p-3 border rounded-lg hover-scale animate-fade-in" style={{ animationDelay: `${0.3 + index * 0.1}s` }}>
                   <div className="flex justify-between items-start mb-2">
                     <h4 className="font-medium">{class_.subject}</h4>
                     <Badge variant="outline">{class_.time}</Badge>
