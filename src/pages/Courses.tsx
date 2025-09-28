@@ -1,9 +1,16 @@
 import { useState } from "react";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
 import { Badge } from "@/components/ui/badge";
-import { Progress } from "@/components/ui/progress";
+import { Input } from "@/components/ui/input";
+import { ClassCard } from "@/components/ClassCard";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 import {
   Dialog,
   DialogContent,
@@ -14,67 +21,151 @@ import {
 } from "@/components/ui/dialog";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Plus, BookOpen, Users, Clock, MoreHorizontal } from "lucide-react";
+import { 
+  Plus,
+  Search,
+  Filter,
+  BookOpen,
+  Users,
+  Clock,
+  Star,
+  Grid,
+  List,
+} from "lucide-react";
 import { useToast } from "@/hooks/use-toast";
 
 const Courses = () => {
   const { toast } = useToast();
+  const [viewMode, setViewMode] = useState<"grid" | "list">("grid");
+  const [searchQuery, setSearchQuery] = useState("");
   const [isAddDialogOpen, setIsAddDialogOpen] = useState(false);
 
   const courses = [
     {
       id: 1,
-      name: "Advanced Mathematics",
-      description: "Comprehensive mathematics course covering algebra, calculus, and geometry",
-      instructor: "You",
-      students: 45,
-      duration: "12 weeks",
-      progress: 68,
-      status: "Active",
-      startDate: "2024-01-15",
-      schedule: "Mon, Wed, Fri - 10:00 AM",
-      color: "bg-primary",
+      title: "Advanced Mathematics - Calculus",
+      subject: "Mathematics",
+      teacher: {
+        name: "Dr. Sarah Johnson",
+        avatar: "/placeholder.svg",
+      },
+      schedule: {
+        day: "Mon, Wed, Fri",
+        time: "10:00 AM - 12:00 PM",
+      },
+      enrolled: 28,
+      capacity: 35,
+      rating: 4.9,
+      price: "$120/month",
+      status: "active" as const,
+      isLive: false,
     },
     {
       id: 2,
-      name: "Physics Fundamentals",
-      description: "Introduction to physics principles and practical applications",
-      instructor: "You",
-      students: 38,
-      duration: "10 weeks",
-      progress: 45,
-      status: "Active",
-      startDate: "2024-02-01",
-      schedule: "Tue, Thu - 2:00 PM",
-      color: "bg-success",
+      title: "Physics Laboratory - Mechanics",
+      subject: "Physics",
+      teacher: {
+        name: "Prof. Michael Chen",
+        avatar: "/placeholder.svg",
+      },
+      schedule: {
+        day: "Tue, Thu",
+        time: "2:00 PM - 4:30 PM",
+      },
+      enrolled: 22,
+      capacity: 30,
+      rating: 4.8,
+      price: "$150/month", 
+      status: "active" as const,
+      isLive: true,
     },
     {
       id: 3,
-      name: "Organic Chemistry",
-      description: "Deep dive into organic chemistry concepts and laboratory work",
-      instructor: "You",
-      students: 42,
-      duration: "14 weeks",
-      progress: 82,
-      status: "Active",
-      startDate: "2024-01-08",
-      schedule: "Mon, Wed - 4:00 PM",
-      color: "bg-warning",
+      title: "Organic Chemistry Fundamentals",
+      subject: "Chemistry",
+      teacher: {
+        name: "Dr. Emma Wilson",
+        avatar: "/placeholder.svg",
+      },
+      schedule: {
+        day: "Mon, Thu",
+        time: "4:00 PM - 6:00 PM",
+      },
+      enrolled: 18,
+      capacity: 25,
+      rating: 4.7,
+      price: "$135/month",
+      status: "upcoming" as const,
+      isLive: false,
     },
     {
       id: 4,
-      name: "Biology Essentials",
-      description: "Core biology concepts from cellular to ecosystem level",
-      instructor: "You",
-      students: 31,
-      duration: "8 weeks",
-      progress: 25,
-      status: "Draft",
-      startDate: "2024-03-15",
-      schedule: "Fri - 3:00 PM",
-      color: "bg-accent",
+      title: "Biology - Cell Structure & Function",
+      subject: "Biology",
+      teacher: {
+        name: "Dr. James Anderson",
+        avatar: "/placeholder.svg",
+      },
+      schedule: {
+        day: "Wed, Sat",
+        time: "9:00 AM - 11:00 AM",
+      },
+      enrolled: 31,
+      capacity: 35,
+      rating: 4.6,
+      price: "$110/month",
+      status: "active" as const,
+      isLive: false,
+    },
+    {
+      id: 5,
+      title: "English Literature - Shakespeare",
+      subject: "English",
+      teacher: {
+        name: "Ms. Lisa Thompson",
+        avatar: "/placeholder.svg",
+      },
+      schedule: {
+        day: "Tue, Fri",
+        time: "6:00 PM - 8:00 PM",
+      },
+      enrolled: 15,
+      capacity: 20,
+      rating: 4.9,
+      price: "$95/month",
+      status: "active" as const,
+      isLive: false,
+    },
+    {
+      id: 6,
+      title: "Computer Science - Data Structures",
+      subject: "Computer Science",
+      teacher: {
+        name: "Dr. Alex Kumar",
+        avatar: "/placeholder.svg",
+      },
+      schedule: {
+        day: "Sat, Sun",
+        time: "1:00 PM - 3:30 PM",
+      },
+      enrolled: 12,
+      capacity: 20,
+      rating: 4.8,
+      price: "$180/month",
+      status: "upcoming" as const,
+      isLive: false,
     },
   ];
+
+  const filteredCourses = courses.filter(course =>
+    course.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    course.subject.toLowerCase().includes(searchQuery.toLowerCase()) ||
+    course.teacher.name.toLowerCase().includes(searchQuery.toLowerCase())
+  );
+
+  const totalStudents = courses.reduce((sum, course) => sum + course.enrolled, 0);
+  const activeCourses = courses.filter(course => course.status === "active").length;
+  const liveCourses = courses.filter(course => course.isLive).length;
 
   const handleAddCourse = () => {
     toast({
@@ -84,28 +175,23 @@ const Courses = () => {
     setIsAddDialogOpen(false);
   };
 
-  const getStatusBadge = (status: string) => {
-    const statusColors = {
-      Active: "bg-success-light text-success",
-      Draft: "bg-warning-light text-warning",
-      Completed: "bg-accent text-accent-foreground",
-    };
-    return <Badge className={statusColors[status as keyof typeof statusColors]}>{status}</Badge>;
-  };
-
   return (
-    <div className="space-y-6">
+    <div className="space-y-8">
       {/* Header */}
-      <div className="flex justify-between items-center">
-        <div>
-          <h1 className="text-3xl font-bold text-foreground">Courses</h1>
-          <p className="text-muted-foreground">Manage your curriculum and course content</p>
+      <div className="flex flex-col sm:flex-row items-start sm:items-center justify-between gap-4">
+        <div className="space-y-1">
+          <h1 className="text-4xl font-bold gradient-text">
+            Course Management
+          </h1>
+          <p className="text-lg text-muted-foreground">
+            Manage your courses, schedules, and student enrollments
+          </p>
         </div>
         <Dialog open={isAddDialogOpen} onOpenChange={setIsAddDialogOpen}>
           <DialogTrigger asChild>
-            <Button className="bg-primary hover:bg-primary-hover">
-              <Plus className="mr-2 h-4 w-4" />
-              Create Course
+            <Button className="hover-scale">
+              <Plus className="h-4 w-4 mr-2" />
+              Create New Course
             </Button>
           </DialogTrigger>
           <DialogContent className="max-w-md">
@@ -142,113 +228,168 @@ const Courses = () => {
       </div>
 
       {/* Stats Overview */}
-      <div className="grid gap-4 md:grid-cols-4">
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Courses</CardTitle>
-            <BookOpen className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">{courses.length}</div>
-          </CardContent>
-        </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Active Courses</CardTitle>
-            <BookOpen className="h-4 w-4 text-success" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold text-success">
-              {courses.filter(c => c.status === "Active").length}
+      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
+        <Card className="soft-shadow border-0 bg-gradient-to-br from-card to-card/50">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">Total Courses</p>
+                <p className="text-3xl font-bold text-foreground">{courses.length}</p>
+              </div>
+              <div className="p-3 bg-primary/10 rounded-2xl">
+                <BookOpen className="h-6 w-6 text-primary" />
+              </div>
             </div>
           </CardContent>
         </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Total Enrollments</CardTitle>
-            <Users className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {courses.reduce((acc, course) => acc + course.students, 0)}
+
+        <Card className="soft-shadow border-0 bg-gradient-to-br from-card to-card/50">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">Active Courses</p>
+                <p className="text-3xl font-bold text-success">{activeCourses}</p>
+              </div>
+              <div className="p-3 bg-success/10 rounded-2xl">
+                <Users className="h-6 w-6 text-success" />
+              </div>
             </div>
           </CardContent>
         </Card>
-        <Card>
-          <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-            <CardTitle className="text-sm font-medium">Avg. Progress</CardTitle>
-            <Clock className="h-4 w-4 text-muted-foreground" />
-          </CardHeader>
-          <CardContent>
-            <div className="text-2xl font-bold">
-              {Math.round(courses.reduce((acc, course) => acc + course.progress, 0) / courses.length)}%
+
+        <Card className="soft-shadow border-0 bg-gradient-to-br from-card to-card/50">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">Live Now</p>
+                <p className="text-3xl font-bold text-destructive">{liveCourses}</p>
+              </div>
+              <div className="p-3 bg-destructive/10 rounded-2xl">
+                <Clock className="h-6 w-6 text-destructive" />
+              </div>
+            </div>
+          </CardContent>
+        </Card>
+
+        <Card className="soft-shadow border-0 bg-gradient-to-br from-card to-card/50">
+          <CardContent className="p-6">
+            <div className="flex items-center justify-between">
+              <div>
+                <p className="text-sm font-medium text-muted-foreground">Total Students</p>
+                <p className="text-3xl font-bold text-foreground">{totalStudents}</p>
+              </div>
+              <div className="p-3 bg-warning/10 rounded-2xl">
+                <Star className="h-6 w-6 text-warning" />
+              </div>
             </div>
           </CardContent>
         </Card>
       </div>
 
-      {/* Courses Grid */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-        {courses.map((course) => (
-          <Card key={course.id} className="shadow-card hover:shadow-lg transition-shadow">
-            <CardHeader>
-              <div className="flex items-start justify-between">
-                <div className={`w-12 h-12 ${course.color} rounded-lg flex items-center justify-center`}>
-                  <BookOpen className="h-6 w-6 text-white" />
-                </div>
-                <Button variant="ghost" size="sm">
-                  <MoreHorizontal className="h-4 w-4" />
-                </Button>
-              </div>
-              <div>
-                <CardTitle className="text-lg">{course.name}</CardTitle>
-                <CardDescription className="line-clamp-2">{course.description}</CardDescription>
-              </div>
-            </CardHeader>
-            <CardContent className="space-y-4">
-              <div className="flex items-center justify-between text-sm">
-                <span className="text-muted-foreground">Progress</span>
-                <span className="font-medium">{course.progress}%</span>
-              </div>
-              <Progress value={course.progress} className="h-2" />
-              
-              <div className="grid grid-cols-2 gap-4 text-sm">
-                <div>
-                  <p className="text-muted-foreground">Students</p>
-                  <p className="font-medium flex items-center">
-                    <Users className="mr-1 h-3 w-3" />
-                    {course.students}
-                  </p>
-                </div>
-                <div>
-                  <p className="text-muted-foreground">Duration</p>
-                  <p className="font-medium flex items-center">
-                    <Clock className="mr-1 h-3 w-3" />
-                    {course.duration}
-                  </p>
-                </div>
-              </div>
+      {/* Filters and Controls */}
+      <Card className="soft-shadow border-0">
+        <CardHeader className="pb-4">
+          <CardTitle className="text-lg">Course Filters</CardTitle>
+        </CardHeader>
+        <CardContent>
+          <div className="flex flex-col sm:flex-row gap-4">
+            <div className="relative flex-1">
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
+              <Input
+                placeholder="Search courses, subjects, or teachers..."
+                value={searchQuery}
+                onChange={(e) => setSearchQuery(e.target.value)}
+                className="pl-10"
+              />
+            </div>
+            
+            <Select defaultValue="all">
+              <SelectTrigger className="w-40">
+                <SelectValue placeholder="Subject" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Subjects</SelectItem>
+                <SelectItem value="mathematics">Mathematics</SelectItem>
+                <SelectItem value="physics">Physics</SelectItem>
+                <SelectItem value="chemistry">Chemistry</SelectItem>
+                <SelectItem value="biology">Biology</SelectItem>
+                <SelectItem value="english">English</SelectItem>
+              </SelectContent>
+            </Select>
 
-              <div className="space-y-2">
-                <div className="flex items-center justify-between">
-                  <span className="text-sm text-muted-foreground">Schedule</span>
-                  {getStatusBadge(course.status)}
-                </div>
-                <p className="text-sm font-medium">{course.schedule}</p>
-              </div>
+            <Select defaultValue="all">
+              <SelectTrigger className="w-32">
+                <SelectValue placeholder="Status" />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="all">All Status</SelectItem>
+                <SelectItem value="active">Active</SelectItem>
+                <SelectItem value="upcoming">Upcoming</SelectItem>
+                <SelectItem value="completed">Completed</SelectItem>
+              </SelectContent>
+            </Select>
 
-              <div className="flex gap-2 pt-2">
-                <Button variant="outline" size="sm" className="flex-1">
-                  Edit Course
-                </Button>
-                <Button size="sm" className="flex-1">
-                  View Details
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+            <div className="flex items-center gap-2 border rounded-lg p-1">
+              <Button
+                variant={viewMode === "grid" ? "default" : "ghost"}
+                size="sm"
+                onClick={() => setViewMode("grid")}
+                className="h-8 w-8 p-0"
+              >
+                <Grid className="h-4 w-4" />
+              </Button>
+              <Button
+                variant={viewMode === "list" ? "default" : "ghost"}
+                size="sm"
+                onClick={() => setViewMode("list")}
+                className="h-8 w-8 p-0"
+              >
+                <List className="h-4 w-4" />
+              </Button>
+            </div>
+          </div>
+        </CardContent>
+      </Card>
+
+      {/* Course Grid/List */}
+      <div className={`grid gap-6 ${
+        viewMode === "grid" 
+          ? "md:grid-cols-2 lg:grid-cols-3" 
+          : "grid-cols-1"
+      }`}>
+        {filteredCourses.map((course) => (
+          <ClassCard
+            key={course.id}
+            title={course.title}
+            subject={course.subject}
+            teacher={course.teacher}
+            schedule={course.schedule}
+            enrolled={course.enrolled}
+            capacity={course.capacity}
+            rating={course.rating}
+            price={course.price}
+            status={course.status}
+            isLive={course.isLive}
+            className={viewMode === "list" ? "max-w-none" : ""}
+          />
         ))}
       </div>
+
+      {filteredCourses.length === 0 && (
+        <Card className="soft-shadow border-0 text-center py-12">
+          <CardContent>
+            <BookOpen className="h-12 w-12 text-muted-foreground mx-auto mb-4" />
+            <h3 className="text-lg font-semibold mb-2">No courses found</h3>
+            <p className="text-muted-foreground mb-4">
+              Try adjusting your search criteria or create a new course.
+            </p>
+            <Button>
+              <Plus className="h-4 w-4 mr-2" />
+              Create Course
+            </Button>
+          </CardContent>
+        </Card>
+      )}
     </div>
   );
 };

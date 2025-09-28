@@ -2,63 +2,66 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Educational LMS Design System - Professional & Modern */
+/* Modern Educational LMS Design System - Clean & Student-Friendly */
 
 @layer base {
   :root {
-    /* Educational color palette */
-    --background: 248 250 252;
-    --foreground: 215 25% 27%;
+    /* Soft neutral backgrounds */
+    --background: 249 250 251;
+    --foreground: 17 24 39;
 
-    --card: 0 0% 100%;
-    --card-foreground: 215 25% 27%;
+    --card: 255 255 255;
+    --card-foreground: 17 24 39;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 215 25% 27%;
+    --popover: 255 255 255;
+    --popover-foreground: 17 24 39;
 
-    /* Educational primary - Professional blue */
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
-    --primary-hover: 217 91% 55%;
+    /* Vibrant primary - Modern blue */
+    --primary: 59 130 246;
+    --primary-foreground: 255 255 255;
+    --primary-hover: 37 99 235;
+    --primary-light: 219 234 254;
 
-    /* Educational secondary - Soft blue */
-    --secondary: 214 95% 93%;
-    --secondary-foreground: 217 91% 60%;
+    /* Soft secondary - Light blue/gray */
+    --secondary: 241 245 249;
+    --secondary-foreground: 51 65 85;
 
-    /* Educational success - Green for achievements */
-    --success: 142 76% 36%;
-    --success-foreground: 0 0% 100%;
-    --success-light: 142 76% 94%;
+    /* Success - Modern green */
+    --success: 34 197 94;
+    --success-foreground: 255 255 255;
+    --success-light: 240 253 244;
 
-    /* Educational warning - Orange for attention */
-    --warning: 38 92% 50%;
-    --warning-foreground: 0 0% 100%;
-    --warning-light: 38 92% 95%;
+    /* Warning - Vibrant orange */
+    --warning: 251 146 60;
+    --warning-foreground: 255 255 255;
+    --warning-light: 255 247 237;
 
-    --muted: 215 27% 97%;
-    --muted-foreground: 215 15% 55%;
+    --muted: 248 250 252;
+    --muted-foreground: 100 116 139;
 
-    --accent: 217 91% 95%;
-    --accent-foreground: 217 91% 60%;
+    --accent: 241 245 249;
+    --accent-foreground: 59 130 246;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 239 68 68;
+    --destructive-foreground: 255 255 255;
 
-    --border: 215 20% 90%;
-    --input: 215 20% 94%;
-    --ring: 217 91% 60%;
+    --border: 229 231 235;
+    --input: 243 244 246;
+    --ring: 59 130 246;
 
-    --radius: 0.75rem;
+    --radius: 1rem;
 
-    /* Educational gradients */
-    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(217 91% 55%));
-    --gradient-success: linear-gradient(135deg, hsl(142 76% 36%), hsl(142 76% 42%));
-    --gradient-hero: linear-gradient(135deg, hsl(217 91% 60%), hsl(210 91% 55%));
+    /* Modern gradients */
+    --gradient-primary: linear-gradient(135deg, rgb(59 130 246), rgb(37 99 235));
+    --gradient-success: linear-gradient(135deg, rgb(34 197 94), rgb(22 163 74));
+    --gradient-hero: linear-gradient(135deg, rgb(59 130 246), rgb(139 92 246));
+    --gradient-background: linear-gradient(180deg, rgb(249 250 251), rgb(243 244 246));
 
-    /* Educational shadows */
-    --shadow-sm: 0 1px 3px 0 hsl(217 91% 60% / 0.1);
-    --shadow-card: 0 4px 6px -1px hsl(217 91% 60% / 0.1);
-    --shadow-lg: 0 10px 15px -3px hsl(217 91% 60% / 0.1);
+    /* Elegant shadows */
+    --shadow-soft: 0 1px 3px 0 rgb(0 0 0 / 0.1);
+    --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+    --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
+    --shadow-xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
 
     /* LMS specific sidebar */
     --sidebar-background: 217 91% 60%;
@@ -75,48 +78,75 @@
   }
 
   .dark {
-    --background: 217 32% 17%;
-    --foreground: 0 0% 95%;
+    --background: 15 23 42;
+    --foreground: 248 250 252;
 
-    --card: 217 32% 20%;
-    --card-foreground: 0 0% 95%;
+    --card: 30 41 59;
+    --card-foreground: 248 250 252;
 
-    --popover: 217 32% 20%;
-    --popover-foreground: 0 0% 95%;
+    --popover: 30 41 59;
+    --popover-foreground: 248 250 252;
 
-    --primary: 217 91% 60%;
-    --primary-foreground: 0 0% 100%;
+    --primary: 59 130 246;
+    --primary-foreground: 255 255 255;
 
-    --secondary: 217 32% 25%;
-    --secondary-foreground: 0 0% 95%;
+    --secondary: 51 65 85;
+    --secondary-foreground: 248 250 252;
 
-    --success: 142 76% 40%;
-    --success-foreground: 0 0% 100%;
-    --success-light: 142 76% 15%;
+    --success: 34 197 94;
+    --success-foreground: 255 255 255;
+    --success-light: 20 83 45;
 
-    --warning: 38 92% 55%;
-    --warning-foreground: 0 0% 100%;
-    --warning-light: 38 92% 15%;
+    --warning: 251 146 60;
+    --warning-foreground: 255 255 255;
+    --warning-light: 154 52 18;
 
-    --muted: 217 32% 25%;
-    --muted-foreground: 217 15% 70%;
+    --muted: 51 65 85;
+    --muted-foreground: 148 163 184;
 
-    --accent: 217 32% 25%;
-    --accent-foreground: 0 0% 95%;
+    --accent: 51 65 85;
+    --accent-foreground: 248 250 252;
 
-    --destructive: 0 84% 60%;
-    --destructive-foreground: 0 0% 100%;
+    --destructive: 239 68 68;
+    --destructive-foreground: 255 255 255;
 
-    --border: 217 32% 25%;
-    --input: 217 32% 25%;
-    --ring: 217 91% 60%;
+    --border: 51 65 85;
+    --input: 51 65 85;
+    --ring: 59 130 246;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground;
+    font-feature-settings: "rlig" 1, "calt" 1;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
   }
 }
 
 @layer utilities {
-  /* Animation utilities */
+  /* Modern Animation Utilities */
   .hover-scale {
-    @apply transition-transform duration-200 hover:scale-105;
+    @apply transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg;
+  }
+  
+  .hover-lift {
+    @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl;
+  }
+  
+  .glass-effect {
+    @apply bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-white/20;
+  }
+  
+  .gradient-text {
+    @apply bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent;
+  }
+  
+  .soft-shadow {
+    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
   }
   
   .story-link {
