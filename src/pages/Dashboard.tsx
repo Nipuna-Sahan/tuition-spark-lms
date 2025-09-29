@@ -13,270 +13,184 @@ import {
   Clock,
   TrendingUp,
   PlayCircle,
+  Plus,
+  MessageCircle,
+  FileText,
+  Activity,
+  DollarSign,
 } from "lucide-react";
 
 const Dashboard = () => {
-  const stats = [
+  const activities = [
     {
-      title: "Total Students",
-      value: "156",
-      change: "+12%",
-      trend: "up" as const,
-      icon: Users,
-    },
-    {
-      title: "Active Courses",
-      value: "8",
-      change: "+2",
-      trend: "up" as const,
-      icon: BookOpen,
-    },
-    {
-      title: "Pending Assignments",
-      value: "23",
-      change: "-5",
-      trend: "down" as const,
+      title: "New assignment submitted",
+      description: "Sarah Johnson submitted Math Homework #5",
+      time: "2 hours ago",
       icon: ClipboardList,
+      color: "bg-primary-subtle text-primary",
     },
     {
-      title: "Average Grade",
-      value: "85%",
-      change: "+3%",
-      trend: "up" as const,
-      icon: Award,
-    },
-  ];
-
-  const recentActivity = [
-    {
-      action: "New assignment submitted",
-      student: "Sarah Johnson",
-      subject: "Mathematics",
-      time: "2 hours ago",
-      type: "submission"
-    },
-    {
-      action: "Grade updated",
-      student: "Mike Chen",
-      subject: "Physics", 
+      title: "Grade updated", 
+      description: "Mike Chen received A+ in Physics Quiz",
       time: "4 hours ago",
-      type: "grade"
+      icon: Award,
+      color: "bg-emerald-50 text-emerald-600",
     },
     {
-      action: "New student enrolled",
-      student: "Emma Wilson",
-      subject: "Chemistry",
+      title: "New student enrolled",
+      description: "Emma Wilson joined Chemistry Class",
       time: "1 day ago",
-      type: "enrollment"
+      icon: Users,
+      color: "bg-amber-50 text-amber-600",
     },
     {
-      action: "Live class started",
-      student: "Class 10A",
-      subject: "Mathematics",
+      title: "Live class started",
+      description: "Mathematics Advanced - 25 students joined",
       time: "2 hours ago",
-      type: "live-class"
+      icon: PlayCircle,
+      color: "bg-red-50 text-red-600",
     },
   ];
 
   const upcomingClasses = [
-    {
-      subject: "Mathematics",
-      time: "10:00 AM",
-      duration: "1h 30m",
-      students: 25,
-      room: "Room A",
-      status: "upcoming"
-    },
-    {
-      subject: "Physics", 
-      time: "2:00 PM",
-      duration: "2h",
-      students: 18,
-      room: "Room B", 
-      status: "live"
-    },
-    {
-      subject: "Chemistry",
-      time: "4:00 PM",
-      duration: "1h 45m",
-      students: 22,
-      room: "Room C",
-      status: "upcoming"
-    },
+    { name: "Mathematics Advanced", time: "10:00 AM", students: 25 },
+    { name: "Physics Lab", time: "2:00 PM", students: 18 },
+    { name: "Chemistry Theory", time: "4:00 PM", students: 22 },
   ];
 
+
   return (
-    <div className="space-y-8">
-      {/* Welcome Header */}
-      <div className="space-y-2">
-        <h1 className="text-4xl font-bold gradient-text">
-          Welcome back, John! 👋
-        </h1>
-        <p className="text-lg text-muted-foreground">
-          Here's what's happening in your tuition classes today.
-        </p>
+    <div className="space-y-8 animate-fade-in">
+      {/* Clean Academic Header */}
+      <div className="flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4">
+        <div>
+          <h1 className="text-3xl font-bold text-gray-900 mb-2">Dashboard</h1>
+          <p className="text-gray-600">Welcome back! Here's what's happening with your classes today.</p>
+        </div>
+        <Button className="academic-button-primary hover-lift">
+          <Plus className="h-4 w-4 mr-2" />
+          Create Class
+        </Button>
       </div>
 
-      {/* Stats Grid */}
-      <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {stats.map((stat, index) => (
-          <StatsCard
-            key={stat.title}
-            title={stat.title}
-            value={stat.value}
-            change={stat.change}
-            trend={stat.trend}
-            icon={stat.icon}
-            delay={index * 100}
-          />
-        ))}
+      {/* Professional Stats Grid */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+        <StatsCard
+          title="Total Students"
+          value="248"
+          change="+12.5%"
+          trend="up"
+          icon={Users}
+          delay={0}
+        />
+        <StatsCard
+          title="Active Classes"
+          value="12"
+          change="+2"
+          trend="up"
+          icon={BookOpen}
+          delay={100}
+        />
+        <StatsCard
+          title="This Month Revenue"
+          value="$15,240"
+          change="+18.2%"
+          trend="up"
+          icon={DollarSign}
+          delay={200}
+        />
+        <StatsCard
+          title="Completion Rate"
+          value="94.2%"
+          change="+2.1%"
+          trend="up"
+          icon={TrendingUp}
+          delay={300}
+        />
       </div>
 
-      <div className="grid gap-8 lg:grid-cols-3">
-        {/* Recent Activity */}
-        <Card className="lg:col-span-2 soft-shadow border-0 animate-fade-in">
-          <CardHeader className="pb-4">
-            <div className="flex items-center justify-between">
-              <div>
-                <CardTitle className="text-xl flex items-center gap-2">
-                  <Bell className="h-5 w-5 text-primary" />
-                  Recent Activity
-                </CardTitle>
-                <CardDescription>Latest updates from your classes</CardDescription>
-              </div>
-              <Button variant="outline" size="sm" className="hover-scale">
-                View All
-              </Button>
-            </div>
+      {/* Clean Content Grid */}
+      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6">
+        {/* Activity Feed */}
+        <Card className="lg:col-span-2 academic-card">
+          <CardHeader className="border-b border-gray-100">
+            <CardTitle className="flex items-center gap-2 text-gray-900">
+              <Activity className="h-5 w-5 text-primary" />
+              Recent Activity
+            </CardTitle>
           </CardHeader>
-          <CardContent>
+          <CardContent className="pt-6">
             <div className="space-y-4">
-              {recentActivity.map((activity, index) => (
-                <div 
-                  key={index} 
-                  className="flex items-center gap-4 p-4 bg-muted/50 rounded-xl hover-lift transition-all duration-200"
-                  style={{ animationDelay: `${index * 100}ms` }}
-                >
-                  <div className={`p-2 rounded-lg ${
-                    activity.type === 'submission' ? 'bg-primary/10' :
-                    activity.type === 'grade' ? 'bg-success/10' :
-                    activity.type === 'enrollment' ? 'bg-warning/10' :
-                    'bg-destructive/10'
-                  }`}>
-                    {activity.type === 'submission' ? <ClipboardList className="h-4 w-4 text-primary" /> :
-                     activity.type === 'grade' ? <Award className="h-4 w-4 text-success" /> :
-                     activity.type === 'enrollment' ? <Users className="h-4 w-4 text-warning" /> :
-                     <PlayCircle className="h-4 w-4 text-destructive" />}
+              {activities.map((activity, index) => (
+                <div key={index} className="flex items-start gap-3 p-3 rounded-lg hover:bg-gray-50 transition-colors">
+                  <div className={`p-2 rounded-lg ${activity.color}`}>
+                    <activity.icon className="h-4 w-4" />
                   </div>
-                  <div className="flex-1">
-                    <p className="font-medium text-foreground">{activity.action}</p>
-                    <p className="text-sm text-muted-foreground">
-                      {activity.student} • {activity.subject}
-                    </p>
+                  <div className="flex-1 min-w-0">
+                    <p className="text-sm font-medium text-gray-900">{activity.title}</p>
+                    <p className="text-sm text-gray-600">{activity.description}</p>
+                    <p className="text-xs text-gray-500 mt-1">{activity.time}</p>
                   </div>
-                  <Badge variant="secondary" className="text-xs">{activity.time}</Badge>
                 </div>
               ))}
             </div>
           </CardContent>
         </Card>
 
-        {/* Today's Schedule */}
-        <Card className="soft-shadow border-0 animate-fade-in" style={{ animationDelay: '200ms' }}>
-          <CardHeader className="pb-4">
-            <CardTitle className="text-xl flex items-center gap-2">
-              <Calendar className="h-5 w-5 text-primary" />
-              Today's Classes
-            </CardTitle>
-            <CardDescription>Your schedule for today</CardDescription>
-          </CardHeader>
-          <CardContent>
-            <div className="space-y-4">
-              {upcomingClasses.map((class_, index) => (
-                <div 
-                  key={index} 
-                  className="p-4 border border-border/50 rounded-xl hover-lift transition-all duration-200"
-                  style={{ animationDelay: `${300 + index * 100}ms` }}
-                >
-                  <div className="flex justify-between items-start mb-3">
-                    <div>
-                      <h4 className="font-semibold text-foreground">{class_.subject}</h4>
-                      <p className="text-sm text-muted-foreground">{class_.room}</p>
+        {/* Sidebar Actions */}
+        <div className="space-y-6">
+          {/* Quick Actions */}
+          <Card className="academic-card">
+            <CardHeader className="border-b border-gray-100">
+              <CardTitle className="text-gray-900">Quick Actions</CardTitle>
+            </CardHeader>
+            <CardContent className="pt-6 space-y-3">
+              <Button className="academic-button-secondary w-full justify-start hover-lift">
+                <Plus className="h-4 w-4 mr-2" />
+                Create Assignment
+              </Button>
+              <Button className="academic-button-secondary w-full justify-start hover-lift">
+                <MessageCircle className="h-4 w-4 mr-2" />
+                Send Message
+              </Button>
+              <Button className="academic-button-secondary w-full justify-start hover-lift">
+                <FileText className="h-4 w-4 mr-2" />
+                Generate Report
+              </Button>
+              <Button className="academic-button-secondary w-full justify-start hover-lift">
+                <Calendar className="h-4 w-4 mr-2" />
+                Schedule Class
+              </Button>
+            </CardContent>
+          </Card>
+
+          {/* Today's Schedule */}
+          <Card className="academic-card">
+            <CardHeader className="border-b border-gray-100">
+              <CardTitle className="flex items-center gap-2 text-gray-900">
+                <Clock className="h-5 w-5 text-primary" />
+                Today's Schedule
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="pt-6">
+              <div className="space-y-3">
+                {upcomingClasses.map((classItem, index) => (
+                  <div key={index} className="flex items-center gap-3 p-3 rounded-lg bg-gray-50 hover:bg-gray-100 transition-colors">
+                    <div className="w-3 h-3 rounded-full bg-primary"></div>
+                    <div className="flex-1">
+                      <p className="text-sm font-medium text-gray-900">{classItem.name}</p>
+                      <p className="text-xs text-gray-500">{classItem.time}</p>
                     </div>
-                    <Badge 
-                      variant={class_.status === "live" ? "destructive" : "secondary"}
-                      className="animate-pulse"
-                    >
-                      {class_.status === "live" ? "Live" : class_.time}
+                    <Badge className="bg-primary-subtle text-primary border border-primary-light text-xs">
+                      {classItem.students} students
                     </Badge>
                   </div>
-                  <div className="flex items-center justify-between text-sm">
-                    <div className="flex items-center gap-4 text-muted-foreground">
-                      <span className="flex items-center gap-1">
-                        <Users className="h-3 w-3" />
-                        {class_.students}
-                      </span>
-                      <span className="flex items-center gap-1">
-                        <Clock className="h-3 w-3" />
-                        {class_.duration}
-                      </span>
-                    </div>
-                    {class_.status === "live" && (
-                      <Button size="sm" className="h-8 hover-scale">
-                        <PlayCircle className="h-3 w-3 mr-1" />
-                        Join
-                      </Button>
-                    )}
-                  </div>
-                </div>
-              ))}
-            </div>
-            <Button variant="outline" className="w-full mt-4 hover-scale">
-              <Calendar className="h-4 w-4 mr-2" />
-              View Full Schedule
-            </Button>
-          </CardContent>
-        </Card>
-      </div>
-
-      {/* Course Performance */}
-      <Card className="soft-shadow border-0">
-        <CardHeader>
-          <CardTitle className="text-xl">Course Performance Overview</CardTitle>
-          <CardDescription>Average performance and engagement across all courses</CardDescription>
-        </CardHeader>
-        <CardContent>
-          <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-            {[
-              { subject: "Mathematics", progress: 88, students: 45, color: "bg-blue-500" },
-              { subject: "Physics", progress: 92, students: 38, color: "bg-green-500" },
-              { subject: "Chemistry", progress: 85, students: 42, color: "bg-purple-500" },
-              { subject: "Biology", progress: 90, students: 31, color: "bg-orange-500" },
-            ].map((course, index) => (
-              <div 
-                key={index} 
-                className="space-y-4 p-4 bg-muted/30 rounded-xl hover-lift transition-all duration-200"
-                style={{ animationDelay: `${index * 100}ms` }}
-              >
-                <div className="flex items-center gap-3">
-                  <div className={`w-3 h-3 rounded-full ${course.color}`} />
-                  <h4 className="font-medium text-foreground">{course.subject}</h4>
-                </div>
-                <div className="space-y-2">
-                  <div className="flex justify-between text-sm">
-                    <span className="text-muted-foreground">Progress</span>
-                    <span className="font-medium">{course.progress}%</span>
-                  </div>
-                  <Progress value={course.progress} className="h-2" />
-                </div>
-                <p className="text-xs text-muted-foreground">
-                  {course.students} students enrolled
-                </p>
+                ))}
               </div>
-            ))}
-          </div>
-        </CardContent>
-      </Card>
+            </CardContent>
+          </Card>
+        </div>
+      </div>
     </div>
   );
 };

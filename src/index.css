@@ -2,79 +2,90 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Modern Educational LMS Design System - Clean & Student-Friendly */
+/* Modern Academic LMS Design System - Clean & Professional */
 
 @layer base {
   :root {
-    /* Soft neutral backgrounds */
-    --background: 249 250 251;
-    --foreground: 17 24 39;
+    /* Academic theme - Clean backgrounds */
+    --background: 249 250 251;        /* gray-50 */
+    --foreground: 17 24 39;           /* gray-900 */
 
-    --card: 255 255 255;
-    --card-foreground: 17 24 39;
+    --card: 255 255 255;              /* white */
+    --card-foreground: 17 24 39;      /* gray-900 */
 
     --popover: 255 255 255;
     --popover-foreground: 17 24 39;
 
-    /* Vibrant primary - Modern blue */
-    --primary: 59 130 246;
+    /* Primary - Trust & Reliability (Blue) */
+    --primary: 37 99 235;             /* blue-600 */
     --primary-foreground: 255 255 255;
-    --primary-hover: 37 99 235;
-    --primary-light: 219 234 254;
+    --primary-hover: 29 78 216;       /* blue-700 */
+    --primary-light: 219 234 254;     /* blue-100 */
+    --primary-subtle: 239 246 255;    /* blue-50 */
 
-    /* Soft secondary - Light blue/gray */
-    --secondary: 241 245 249;
-    --secondary-foreground: 51 65 85;
+    /* Secondary - Growth & Success (Emerald) */
+    --secondary: 16 185 129;          /* emerald-500 */
+    --secondary-foreground: 255 255 255;
+    --secondary-hover: 5 150 105;     /* emerald-600 */
+    --secondary-light: 209 250 229;   /* emerald-100 */
 
-    /* Success - Modern green */
-    --success: 34 197 94;
+    /* Accent - Highlights & Warnings (Amber) */
+    --accent: 245 158 11;             /* amber-500 */
+    --accent-foreground: 255 255 255;
+    --accent-light: 254 243 199;      /* amber-100 */
+
+    /* Academic text hierarchy */
+    --text-primary: 17 24 39;         /* gray-900 - titles */
+    --text-secondary: 55 65 81;       /* gray-700 - body */
+    --text-muted: 107 114 128;        /* gray-500 - helper text */
+
+    /* System colors */
+    --success: 16 185 129;            /* emerald-500 */
     --success-foreground: 255 255 255;
-    --success-light: 240 253 244;
+    --success-light: 209 250 229;
 
-    /* Warning - Vibrant orange */
-    --warning: 251 146 60;
+    --warning: 245 158 11;            /* amber-500 */
     --warning-foreground: 255 255 255;
-    --warning-light: 255 247 237;
+    --warning-light: 254 243 199;
 
-    --muted: 248 250 252;
-    --muted-foreground: 100 116 139;
-
-    --accent: 241 245 249;
-    --accent-foreground: 59 130 246;
-
-    --destructive: 239 68 68;
+    --destructive: 239 68 68;         /* red-500 */
     --destructive-foreground: 255 255 255;
+    --destructive-light: 254 226 226; /* red-100 */
 
-    --border: 229 231 235;
-    --input: 243 244 246;
-    --ring: 59 130 246;
+    --muted: 248 250 252;             /* slate-50 */
+    --muted-foreground: 100 116 139;  /* slate-500 */
 
-    --radius: 1rem;
+    --border: 229 231 235;            /* gray-200 */
+    --input: 255 255 255;             /* white with border */
+    --ring: 37 99 235;                /* blue-600 for focus */
 
-    /* Modern gradients */
-    --gradient-primary: linear-gradient(135deg, rgb(59 130 246), rgb(37 99 235));
-    --gradient-success: linear-gradient(135deg, rgb(34 197 94), rgb(22 163 74));
-    --gradient-hero: linear-gradient(135deg, rgb(59 130 246), rgb(139 92 246));
-    --gradient-background: linear-gradient(180deg, rgb(249 250 251), rgb(243 244 246));
+    --radius: 0.75rem;                /* rounded-xl for cards */
 
-    /* Elegant shadows */
-    --shadow-soft: 0 1px 3px 0 rgb(0 0 0 / 0.1);
-    --shadow-card: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
-    --shadow-lg: 0 20px 25px -5px rgb(0 0 0 / 0.1), 0 10px 10px -5px rgb(0 0 0 / 0.04);
-    --shadow-xl: 0 25px 50px -12px rgb(0 0 0 / 0.25);
+    /* Academic gradients - soft and professional */
+    --gradient-primary: linear-gradient(135deg, hsl(217 91% 60%), hsl(224 76% 48%));
+    --gradient-secondary: linear-gradient(135deg, hsl(158 64% 52%), hsl(160 84% 39%));
+    --gradient-background: linear-gradient(180deg, hsl(var(--background)), hsl(210 40% 98%));
+    --gradient-card: linear-gradient(145deg, hsl(var(--card)) 0%, hsl(210 40% 98%) 100%);
 
-    /* LMS specific sidebar */
-    --sidebar-background: 217 91% 60%;
-    --sidebar-foreground: 0 0% 100%;
-    --sidebar-primary: 0 0% 100%;
-    --sidebar-primary-foreground: 217 91% 60%;
-    --sidebar-accent: 217 91% 55%;
-    --sidebar-accent-foreground: 0 0% 100%;
-    --sidebar-border: 217 91% 55%;
-    --sidebar-ring: 0 0% 100%;
+    /* Professional shadows - subtle and clean */
+    --shadow-soft: 0 1px 3px 0 hsl(0 0% 0% / 0.1), 0 1px 2px 0 hsl(0 0% 0% / 0.06);
+    --shadow-card: 0 4px 6px -1px hsl(0 0% 0% / 0.1), 0 2px 4px -1px hsl(0 0% 0% / 0.06);
+    --shadow-lg: 0 10px 15px -3px hsl(0 0% 0% / 0.1), 0 4px 6px -2px hsl(0 0% 0% / 0.05);
+    --shadow-xl: 0 20px 25px -5px hsl(0 0% 0% / 0.1), 0 10px 10px -5px hsl(0 0% 0% / 0.04);
 
-    /* Transitions */
-    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    /* Academic sidebar - professional blue theme */
+    --sidebar-background: 255 255 255;     /* white */
+    --sidebar-foreground: 55 65 81;        /* gray-700 */
+    --sidebar-primary: 37 99 235;          /* blue-600 */
+    --sidebar-primary-foreground: 255 255 255;
+    --sidebar-accent: 239 246 255;         /* blue-50 */
+    --sidebar-accent-foreground: 37 99 235; /* blue-600 */
+    --sidebar-border: 229 231 235;         /* gray-200 */
+    --sidebar-ring: 37 99 235;             /* blue-600 */
+
+    /* Professional transitions */
+    --transition-smooth: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+    --transition-spring: all 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
   }
 
   .dark {
@@ -123,33 +134,73 @@
   body {
     @apply bg-background text-foreground;
     font-feature-settings: "rlig" 1, "calt" 1;
-    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen', sans-serif;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
   }
 }
 
 @layer utilities {
-  /* Modern Animation Utilities */
-  .hover-scale {
-    @apply transition-all duration-300 ease-out hover:scale-105 hover:shadow-lg;
-  }
-  
+  /* Academic UI Utilities - Professional & Subtle */
   .hover-lift {
-    @apply transition-all duration-300 ease-out hover:-translate-y-1 hover:shadow-xl;
+    @apply transition-all duration-200 ease-out hover:-translate-y-1 hover:shadow-lg;
   }
   
-  .glass-effect {
-    @apply bg-white/70 dark:bg-gray-800/70 backdrop-blur-md border border-white/20;
+  .hover-scale {
+    @apply transition-transform duration-200 ease-out hover:scale-105;
   }
   
-  .gradient-text {
-    @apply bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent;
+  .academic-card {
+    @apply bg-card rounded-xl shadow-sm border border-gray-100 hover:shadow-md transition-all duration-200;
   }
   
-  .soft-shadow {
-    box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -1px rgb(0 0 0 / 0.06);
+  .academic-button-primary {
+    @apply bg-primary text-primary-foreground hover:bg-primary-hover rounded-md px-4 py-2 font-medium transition-colors duration-200;
   }
   
-  .story-link {
-    @apply relative inline-block after:content-[''] after:absolute after:w-full after:scale-x-0 after:h-0.5 after:bottom-0 after:left-0 after:bg-primary after:origin-bottom-right after:transition-transform after:duration-300 hover:after:scale-x-100 hover:after:origin-bottom-left;
+  .academic-button-secondary {
+    @apply border border-primary text-primary hover:bg-primary-subtle rounded-md px-4 py-2 font-medium transition-colors duration-200;
+  }
+  
+  .academic-input {
+    @apply bg-white border border-gray-200 rounded-md px-3 py-2 focus:ring-2 focus:ring-primary focus:border-transparent transition-all duration-200;
+  }
+  
+  .subject-badge-math {
+    @apply bg-blue-50 text-blue-700 border border-blue-200;
+  }
+  
+  .subject-badge-science {
+    @apply bg-emerald-50 text-emerald-700 border border-emerald-200;
+  }
+  
+  .subject-badge-english {
+    @apply bg-amber-50 text-amber-700 border border-amber-200;
+  }
+  
+  .text-hierarchy-title {
+    @apply text-gray-900 font-bold tracking-tight;
+  }
+  
+  .text-hierarchy-body {
+    @apply text-gray-700 leading-relaxed;
+  }
+  
+  .text-hierarchy-muted {
+    @apply text-gray-500 text-sm;
+  }
+  
+  .gradient-academic {
+    background: var(--gradient-background);
+  }
+  
+  .shimmer {
+    background: linear-gradient(90deg, transparent, rgba(255,255,255,0.4), transparent);
+    animation: shimmer 1.5s infinite;
+  }
+  
+  @keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
   }
 }

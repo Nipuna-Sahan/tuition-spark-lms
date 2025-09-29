@@ -24,17 +24,17 @@ export function StatsCard({
   return (
     <Card 
       className={cn(
-        "hover-lift soft-shadow animate-scale-in border-0 bg-gradient-to-br from-card to-card/50",
+        "academic-card hover-lift animate-fade-in",
         className
       )}
       style={{ animationDelay: `${delay}ms` }}
     >
       <CardHeader className="flex flex-row items-center justify-between pb-3">
         <div className="space-y-1">
-          <p className="text-sm font-medium text-muted-foreground">{title}</p>
-          <p className="text-2xl font-bold text-foreground">{value}</p>
+          <p className="text-sm font-medium text-gray-500">{title}</p>
+          <p className="text-2xl font-bold text-gray-900">{value}</p>
         </div>
-        <div className="p-3 bg-primary/10 rounded-2xl">
+        <div className="p-3 bg-primary-subtle rounded-xl border border-primary-light">
           <Icon className="h-6 w-6 text-primary" />
         </div>
       </CardHeader>
@@ -43,13 +43,13 @@ export function StatsCard({
           <div className="flex items-center text-sm">
             <span className={cn(
               "font-medium",
-              trend === "up" && "text-success",
-              trend === "down" && "text-destructive",
-              trend === "neutral" && "text-muted-foreground"
+              trend === "up" && "text-emerald-600",
+              trend === "down" && "text-red-600",
+              trend === "neutral" && "text-gray-500"
             )}>
               {change}
             </span>
-            <span className="text-muted-foreground ml-1">from last month</span>
+            <span className="text-gray-500 ml-1">from last month</span>
           </div>
         </CardContent>
       )}

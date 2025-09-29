@@ -46,61 +46,68 @@ export function ClassCard({
   isLive = false,
   className
 }: ClassCardProps) {
+  const getSubjectBadgeClass = (subject: string) => {
+    const subjectLower = subject.toLowerCase();
+    if (subjectLower.includes('math')) return "subject-badge-math";
+    if (subjectLower.includes('science') || subjectLower.includes('physics') || subjectLower.includes('chemistry')) return "subject-badge-science";
+    if (subjectLower.includes('english') || subjectLower.includes('language')) return "subject-badge-english";
+    return "subject-badge-math"; // default
+  };
+
   return (
     <Card className={cn(
-      "hover-lift soft-shadow border-0 bg-gradient-to-br from-card to-card/50 overflow-hidden group",
+      "academic-card hover-lift overflow-hidden group",
       className
     )}>
-      {/* Header with subject badge and status */}
+      {/* Clean Header with subject badge */}
       <CardHeader className="pb-4">
         <div className="flex items-start justify-between">
           <div className="space-y-2">
             <div className="flex items-center gap-2">
               <Badge 
-                variant="secondary" 
-                className="bg-primary/10 text-primary border-0"
+                className={cn("px-2 py-1 text-xs font-medium rounded-md", getSubjectBadgeClass(subject))}
               >
                 <BookOpen className="h-3 w-3 mr-1" />
                 {subject}
               </Badge>
               {isLive && (
-                <Badge variant="destructive" className="animate-pulse">
-                  <div className="w-2 h-2 rounded-full bg-white mr-1" />
+                <Badge className="bg-red-50 text-red-700 border border-red-200 animate-pulse">
+                  <div className="w-2 h-2 rounded-full bg-red-500 mr-1" />
                   Live
                 </Badge>
               )}
             </div>
-            <h3 className="text-lg font-semibold text-foreground group-hover:text-primary transition-colors">
+            <h3 className="text-lg font-semibold text-gray-900 group-hover:text-primary transition-colors">
               {title}
             </h3>
           </div>
           {rating && (
-            <div className="flex items-center gap-1 text-sm">
-              <Star className="h-4 w-4 fill-yellow-400 text-yellow-400" />
-              <span className="font-medium">{rating}</span>
+            <div className="flex items-center gap-1 text-sm bg-amber-50 px-2 py-1 rounded-md">
+              <Star className="h-4 w-4 fill-amber-400 text-amber-500" />
+              <span className="font-medium text-amber-700">{rating}</span>
             </div>
           )}
         </div>
       </CardHeader>
 
       <CardContent className="space-y-4">
-        {/* Teacher Info */}
+        {/* Clean Teacher Info */}
         <div className="flex items-center gap-3">
-          <Avatar className="h-10 w-10 border-2 border-primary/20">
+          <Avatar className="h-10 w-10 border-2 border-gray-200">
             <AvatarImage src={teacher.avatar} />
-            <AvatarFallback className="bg-primary/10 text-primary">
+            <AvatarFallback className="bg-gray-100 text-gray-700 font-medium">
               {teacher.name.split(' ').map(n => n[0]).join('')}
             </AvatarFallback>
           </Avatar>
           <div>
-            <p className="font-medium text-foreground">{teacher.name}</p>
-            <p className="text-sm text-muted-foreground">Instructor</p>
+            <p className="font-medium text-gray-900">{teacher.name}</p>
+            <p className="text-sm text-gray-500">Instructor</p>
           </div>
         </div>
 
-        {/* Class Details */}
+        {/* Professional Class Details */}
         <div className="space-y-3">
-          <div className="flex items-center gap-4 text-sm text-muted-foreground">
+          <div className="flex items-center gap-4 text-sm text-gray-500">
             <div className="flex items-center gap-1">
               <Calendar className="h-4 w-4" />
               <span>{schedule.day}</span>
@@ -113,40 +120,40 @@ export function ClassCard({
 
           <div className="flex items-center justify-between">
             <div className="flex items-center gap-1 text-sm">
-              <Users className="h-4 w-4 text-muted-foreground" />
-              <span className="text-muted-foreground">
+              <Users className="h-4 w-4 text-gray-400" />
+              <span className="text-gray-600">
                 {enrolled}/{capacity} students
               </span>
             </div>
             {price && (
-              <div className="text-lg font-bold text-primary">
+              <div className="text-lg font-bold text-primary bg-primary-subtle px-2 py-1 rounded-md">
                 {price}
               </div>
             )}
           </div>
 
-          {/* Progress bar for enrollment */}
-          <div className="w-full bg-muted rounded-full h-2">
+          {/* Clean Progress Bar */}
+          <div className="w-full bg-gray-100 rounded-full h-2">
             <div 
-              className="bg-gradient-to-r from-primary to-primary/80 h-2 rounded-full transition-all duration-500"
+              className="bg-primary h-2 rounded-full transition-all duration-500"
               style={{ width: `${(enrolled / capacity) * 100}%` }}
             />
           </div>
         </div>
 
-        {/* Action Buttons */}
+        {/* Professional Action Buttons */}
         <div className="flex gap-2 pt-2">
           {isLive ? (
-            <Button className="flex-1 bg-gradient-to-r from-primary to-primary/90 hover:from-primary/90 hover:to-primary">
+            <Button className="academic-button-primary flex-1">
               <Play className="h-4 w-4 mr-2" />
               Join Live Class
             </Button>
           ) : (
             <>
-              <Button variant="outline" className="flex-1">
+              <Button className="academic-button-secondary flex-1">
                 View Details
               </Button>
-              <Button className="flex-1">
+              <Button className="academic-button-primary flex-1">
                 {status === "upcoming" ? "Enroll Now" : "Enter Class"}
               </Button>
             </>
