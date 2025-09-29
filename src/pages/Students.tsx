@@ -101,14 +101,14 @@ const Students = () => {
 
   const getGradeBadge = (grade: string) => {
     const gradeColors = {
-      "A+": "bg-success text-success-foreground",
-      "A": "bg-success text-success-foreground",
-      "A-": "bg-success text-success-foreground",
-      "B+": "bg-warning text-warning-foreground",
-      "B": "bg-warning text-warning-foreground",
+      "A+": "bg-emerald-100 text-emerald-700",
+      "A": "bg-emerald-100 text-emerald-700", 
+      "A-": "bg-emerald-100 text-emerald-700",
+      "B+": "bg-blue-100 text-blue-700",
+      "B": "bg-blue-100 text-blue-700",
     };
     return (
-      <Badge className={gradeColors[grade as keyof typeof gradeColors] || "bg-muted"}>
+      <Badge className={gradeColors[grade as keyof typeof gradeColors] || "bg-gray-100 text-gray-700"}>
         {grade}
       </Badge>
     );
